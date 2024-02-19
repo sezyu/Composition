@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.composition.R
 import com.example.composition.databinding.FragmentWelcomeBinding
+import com.example.composition.presentation.ChooseLevelFragment.Companion.NAME
 import java.lang.RuntimeException
 
 class WelcomeFragment : Fragment() {
@@ -26,8 +27,15 @@ class WelcomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.buttonUnderstand.setOnClickListener{
-
+            launchChooseLevelFragment()
         }
+    }
+
+    private fun launchChooseLevelFragment(){
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, ChooseLevelFragment.newInstance())
+            .addToBackStack(NAME)
+            .commit()
     }
 
     override fun onDestroyView() {
